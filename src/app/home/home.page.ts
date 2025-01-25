@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { TaskService } from '../services/task.service';
+import { Task } from '../models/tasks';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +9,14 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class HomePage {
+  newTaskTitle = '';
 
-  constructor() {}
+  constructor(public taskService: TaskService) {}
 
+  addTask() {
+    if (this.newTaskTitle.trim()) {
+      this.taskService.addTask(this.newTaskTitle);
+      this.newTaskTitle = '';
+    }
+  }
 }
